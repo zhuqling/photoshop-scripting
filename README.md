@@ -6,6 +6,26 @@ A PSX photoshop scripting code for replacing image and text , also saving a jpg 
 
 ### Code 
 ```
+if (app.documents.length > 0) {
+  var myDocument = app.activeDocument;
+  var theName = myDocument.name.match(/(.*)\.[^\.]+$/)[1];
+  var thePath = myDocument.path;
+
+  psdOpts = new PhotoshopSaveOptions();
+  psdOpts.embedColorProfile = true;
+  psdOpts.alphaChannels = true;
+  psdOpts.layers = true;
+  psdOpts.spotColors = true;
+
+//lists for desired filename input
+    var num = "c:/here/goes/file/path/for/taking/input/file"
+    var nnum = "c:/here/goes/file/path/for/taking/input/file"
+    var lletter = "c:/here/goes/file/path/for/taking/input/file"
+    var letter = "c:/here/goes/file/path/for/taking/input/file"
+  
+  
+// main code starts here : 
+
       for (var i in num) {
         saveJPEG(thNamer);
         alert("saved Jpeg");
