@@ -1,5 +1,5 @@
 // replace smart object’s content and save psd;
-// 2011, use it at your own risk;
+// 2020, use it at your own risk;
 #target photoshop
 #include json2.js
 
@@ -7,26 +7,14 @@ if (app.documents.length > 0) {
   var myDocument = app.activeDocument;
   var theName = myDocument.name.match(/(.*)\.[^\.]+$/)[1];
   var thePath = myDocument.path;
-  //var theLayer = myDocument.activeLayer;
-  // psd options;
+
   psdOpts = new PhotoshopSaveOptions();
   psdOpts.embedColorProfile = true;
   psdOpts.alphaChannels = true;
   psdOpts.layers = true;
   psdOpts.spotColors = true;
-  // check if layer is smart object;
 
-  //if (VolLayer.kind != "LayerKind.SMARTOBJECT") {
-  //  alert("selected layer is not a smart object")
-
-    // select files;
-    //if ($.os.search(/windows/i) != -1) {
-    //var theFile = new File("/f/thesis-bioinformatics/paper/chromosomes_plot_data/chr_1_end_tertamer/chr1_end_plot_q.tif");
-
-
-    //TitleLayer = TitleGroup.layers[0];D:\thesis-bioinformatics\papers\Win_Scripting_Plug-In
-    var ppath = "D:\\thesis-bioinformatics\\papers\\finally\\";
-
+//lists for desired filename input
     var num = [
       "2",
       "3",
@@ -137,46 +125,34 @@ if (app.documents.length > 0) {
       "w",
       "v"
     ];
-  //  for (var ii in nnum) {
+  
+  
+// main code starts here : 
+
       for (var i in num) {
         saveJPEG(thNamer);
         alert("saved Jpeg");
         myDocument.saveAs((new File("D:\\thesis-bioinformatics" + '/vol-ID/' + thNamer + "_" +".psd")),psdOpts,true);
         alert("saved psd");
-        //for (var j in place) {
+        
           for (var k in letter) {
             var TitleGroup = myDocument.layerSets.getByName('chr_place_plot_');
             var TitleGroup2 = myDocument.layerSets.getByName('chr_text');
-            //VolLayer = TitleGroup.layers.getByName(thprevNames);
+           
             var thNamer = 'chr' + num[i] + '_start' + '_plot_';
             var thNames = 'chr' + num[i] + '_start' + '_plot_' + letter[k];
             var thprevNames = 'chr' + nnum[i] + '_start' + '_plot_' + letter[k];
             VolLayer = TitleGroup.artLayers.getByName(thprevNames);
             VolLayer2 = TitleGroup2.artLayers.getByName('Chr1');
-            //VolLayer.smartObject.contents = conten.NAME[j];
-            //alert(VolLayer);
+           
             myDocument.activeLayer = VolLayer;
             var theFiles = ppath + thNames + '.tif';
-          //}
-          //else {var theFiles = FDialog ("please select files", getFiles, true)};
-          //theFiles = ['D:/thesis-bioinformatics/paper/chromosomes_plot_data/chr_1_end_tertamer/chr1_end_plot_q.tif']
-          if (theFiles && thprevNames != thNames) {
-            // work through the array;
-            //alert(theFiles);
-            //alert(theFiles.length);
-
+          
+          if (theFiles && thprevNames != thNames) 
+          {         
             VolLayer = replaceContents(theFiles);
             VolLayer2.textItem.contents = thNamer;
-
-            // replace smart object;
-            //VolLayer = replaceContents(theFiles);
-            //var theNewName = theFiles[m].name.match(/(.*)\.[^\.]+$/)[1];
-            //save jpg;
-
-
-
-
-          }
+            }
 
       }
     }
@@ -184,7 +160,7 @@ if (app.documents.length > 0) {
 
 
 };
-////// get psds, tifs and jpgs from files //////
+//get psds, tifs and jpgs from files //
 function getFiles(theFile) {
   if (theFile.name.match(/\.(psd|tif)$/i)) {
     return true
@@ -201,7 +177,7 @@ function replaceContents(newFile) {
   desc3.putInteger(idPgNm, 1);
 
   executeAction(idplacedLayerReplaceContents, desc3, DialogModes.NO);
-  //alert();
+  
 
 };
 
