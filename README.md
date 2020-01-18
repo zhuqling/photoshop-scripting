@@ -3,3 +3,34 @@ A PSX photoshop scripting code for replacing image and text , also saving a jpg 
 
 ## Video demo (Click Image)
 [![](https://raw.githubusercontent.com/avialxee/photoshop-scripting/master/screenshot_Photoshop_125.png)](https://youtu.be/1z4UZH3L5Cs "photoshop-scripting")
+
+### Code 
+```
+      for (var i in num) {
+        saveJPEG(thNamer);
+        alert("saved Jpeg");
+        myDocument.saveAs((new File("D:\\thesis-bioinformatics" + '/vol-ID/' + thNamer + "_" +".psd")),psdOpts,true);
+        alert("saved psd");
+        
+          for (var k in letter) {
+            var TitleGroup = myDocument.layerSets.getByName('chr_place_plot_');
+            var TitleGroup2 = myDocument.layerSets.getByName('chr_text');
+           
+            var thNamer = 'chr' + num[i] + '_start' + '_plot_';
+            var thNames = 'chr' + num[i] + '_start' + '_plot_' + letter[k];
+            var thprevNames = 'chr' + nnum[i] + '_start' + '_plot_' + letter[k];
+            VolLayer = TitleGroup.artLayers.getByName(thprevNames);
+            VolLayer2 = TitleGroup2.artLayers.getByName('Chr1');
+           
+            myDocument.activeLayer = VolLayer;
+            var theFiles = ppath + thNames + '.tif';
+          
+          if (theFiles && thprevNames != thNames) 
+          {         
+            VolLayer = replaceContents(theFiles);
+            VolLayer2.textItem.contents = thNamer;
+            }
+
+      }
+    }
+```
